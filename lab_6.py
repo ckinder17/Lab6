@@ -38,10 +38,25 @@ loop three times
 
 import random
 
-def main():
+total_earned = 0
+
+def main(total_earned):
+    results = []
     for i in range(0, 3):
-        print('i--->', i)
-        spin()
+        results.append(spin())
+    print("results", results)
+    winner = jackpot(results)
+    if (winner):
+        print("Winner! You win")
+    else:
+        print("Sorry, try again")
+
+    grand_total = count(results, total_earned)
+    print("grand total: ", grand_total)
+
+    option = input("Play again?")
+    if option.lower() == "y" or option.lower() = "yes":
+        main(total_earned)
 
 def spin():
     rand_num = random.randint(1, 20)
@@ -60,5 +75,28 @@ def spin():
         output = "bar"
 
     print(output, end=" ")
+    return output
 
-main()
+def jackpot(results):
+    # for i in results:
+    #     if(i == results[])
+    if(results[0] == results[1] == results[2]):
+        return True 
+    return False
+
+def count(results, total_earned):
+    money_dict = {
+        "cherries": 1,
+        "orange": .7,
+        "plum": .6,
+        "melon": .4,
+        "bell": .2,
+        "bar": .1
+    }
+
+    for i in results:
+        total += money_dict[i]
+    print("total: ", total)
+    return total_earned + total
+
+main(total_earned)
